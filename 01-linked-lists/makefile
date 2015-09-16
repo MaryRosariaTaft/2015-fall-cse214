@@ -1,7 +1,8 @@
-#all:
-#	javac *.java
-#etc.etc.etc.
+all:
+	javac *.java
+	java Tester
 
 clean:
+	rm *.class
 	rm *~
 	rm \#*

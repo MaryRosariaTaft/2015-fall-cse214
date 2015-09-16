@@ -13,9 +13,9 @@ public class OrderedDoublePair{
 	y = 0.0;
     }
 
-    public OrderedDoublePair(int x, int y){
-	this.x = (double)x;
-	this.y = (double)y;
+    public OrderedDoublePair(int x, int y){ //not necessary--if ints are passed in the constructor with parameters (double x, double y), the ints will automatically be widened into doubles
+	this.x = (double)x; //similarly unnecessary casting
+	this.y = (double)y; //again
     }
 
     public OrderedDoublePair(double x, double y){
@@ -26,9 +26,9 @@ public class OrderedDoublePair{
     //CLASS METHODS
 
     public boolean equals(Object obj){
-	if (this == obj)
+	if(this == obj)
 	    return true;
-	if (obj instanceof OrderedDoublePair){
+	if(obj instanceof OrderedDoublePair){
 	    OrderedDoublePair that = (OrderedDoublePair)obj;
 	    return this.x == that.x && this.y == that.y;
 	}
@@ -36,9 +36,9 @@ public class OrderedDoublePair{
     }
 
     public boolean equalsIgnoreOrder(Object obj){
-	if (this == obj)
+	if(this == obj)
 	    return true;
-	if (obj instanceof OrderedDoublePair){
+	if(obj instanceof OrderedDoublePair){
 	    OrderedDoublePair that = (OrderedDoublePair)obj;
 	    return (this.x == that.x && this.y == that.y) || (this.x == that.y && this.y == that.x);
 	}
