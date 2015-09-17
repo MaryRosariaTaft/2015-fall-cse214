@@ -23,7 +23,32 @@ public class Tester{
 	print(ll);
 	print(ll.contains("dear"));
 	print(ll.contains("nonexistent"));
-	
+	print(ll.size());
+	print(ll.addFirst("alpha"));
+	print(ll);
+	print(ll.remove("whoops"));
+	print(ll);
+	print(ll.remove("hello"));
+	print(ll);
+	print(ll.remove("dear"));
+	print(ll);
+	print(ll.remove("world"));
+	print(ll);
+	ll.add("apple");
+	ll.add("apple");
+	ll.add("pear");
+	ll.add("apple");
+	ll.add("apple");
+	ll.add("pear");
+	ll.add("apple");
+	ll.add("apple");
+	ll.add("pear");	
+	print(ll);
+	print(ll.size());
+	print(ll.removeAll("apple"));
+	print(ll.removeAll("orange"));
+	print(ll); 
+	print(ll.size());
     }
 
     public static void print(Object data){

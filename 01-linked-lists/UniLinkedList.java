@@ -3,6 +3,8 @@ import java.util.*;
 
 public class UniLinkedList<E>{
 
+    //note: 'head' is a dummy node
+
     private Node<E> head = new Node(null);
     private Cursor cursor = new Cursor(this); //???
     private int size = 0;
@@ -46,7 +48,7 @@ public class UniLinkedList<E>{
     }
 
     public boolean contains(E element){
-	//more efficient without the extra method call but
+	//would be more efficient without the extra method call but
 	return indexOf(element) != -1;
     }
 
@@ -70,33 +72,68 @@ public class UniLinkedList<E>{
 		Node<E> nodeToAdd = new Node<E>(elementToAdd);
 		nodeToAdd.setNext(current.getNext());
 		current.setNext(nodeToAdd);
+		size++;
 		return true;
 	    }
 	}
     	return false;
     }
 
-    //unfinished
-    // public boolean addFirst(E element){
-    // 	return;
-    // }
+    //in what case would this return false?
+    public boolean addFirst(E element){
+	Node<E> nodeToAdd = new Node<E>(element);
+	nodeToAdd.setNext(head.getNext());
+	head.setNext(nodeToAdd);
+	size++;
+    	return true;
+    }
 
     public E head(){
     	return head.getData();
     }
 
-    //unfinished
-    // public boolean remove(E element){
-    // 	return;
-    // }
+    public boolean remove(E element){
+	if(size == 0)
+	    return false;
+	Node<E> current = head.getNext();
+	Node<E> preceding = head;
+	//could probably condense here
+	if(current.getData().equals(element)){
+	    preceding.setNext(current.getNext());
+	    size--;
+	    return true;
+	}
+	while(current.hasNext()){	
+	    preceding = current;
+	    current = current.getNext();
+	    if(current.getData().equals(element)){
+		preceding.setNext(current.getNext());
+		size--;
+		return true;
+	    }
+	}
+    	return false;
+    }
 
-    // public boolean removeAll(E element){
-    // 	return;
-    // }
+    //would be more useful if return type were
+    //an int, num times element was removed
+    public boolean removeAll(E element){
+	if(!contains(element))
+	    return false;
+	while(contains(element)){
+	    remove(element);
+	}
+	return true;
+    }
 
-    // public void deduplicate(){
-    // 	return;
-    // }
+    public void deduplicate(){
+	Object[] stack = new Object[size];
+	Node<E> current = head;
+	while(current.hasNext()){
+	    current = current.getNext();
+	}
+    	return;
+    }
 
     @Override
     public int hashCode(){
@@ -105,7 +142,7 @@ public class UniLinkedList<E>{
 
     public String toString(){
 	String str = "";
-	if(size == 0) return "";
+	if(size == 0) return "[[empty]]";
 	Node<E> current = head.getNext();
 	while(current.hasNext()){
 	    str += current.getData().toString() + " -> ";
