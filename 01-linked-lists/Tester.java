@@ -49,6 +49,19 @@ public class Tester{
 	print(ll.removeAll("orange"));
 	print(ll); 
 	print(ll.size());
+	ll.add("apple");
+	ll.add("apple");
+	ll.add("pear");	
+	ll.add("apple");
+	ll.add("apple");
+	ll.add("pear");	
+	ll.add("apple");
+	ll.add("apple");
+	ll.add("pear");	
+	print(ll);
+	print("DEDUPLICATING");
+	ll.deduplicate();
+	print(ll);
     }
 
     public static void print(Object data){

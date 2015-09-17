@@ -16,7 +16,7 @@ public class UniLinkedList<E>{
 	if(obj instanceof UniLinkedList){ //<E>???
 	    UniLinkedList that = (UniLinkedList)obj;
 	    boolean areEqual = false;
-	    //???UNFINISHED
+	    //UNFINISHED
 	    return areEqual;
 	}
 	return false;
@@ -95,14 +95,8 @@ public class UniLinkedList<E>{
     public boolean remove(E element){
 	if(size == 0)
 	    return false;
-	Node<E> current = head.getNext();
-	Node<E> preceding = head;
-	//could probably condense here
-	if(current.getData().equals(element)){
-	    preceding.setNext(current.getNext());
-	    size--;
-	    return true;
-	}
+	Node<E> current = head;
+	Node<E> preceding;
 	while(current.hasNext()){	
 	    preceding = current;
 	    current = current.getNext();
@@ -126,13 +120,48 @@ public class UniLinkedList<E>{
 	return true;
     }
 
+    // //WON'T WORK FOR REMOVING DUPLICATES OF NODES WITH
+    // //NULL DATA ISSUES ISSUES ISSUES BECAUSE DUMMY NODE
+    // public void deduplicate(){
+    // 	if(size < 2)
+    // 	    return;
+    // 	Node<E> current = head.getNext();
+    // 	Node<E> preceding = head;
+    // 	while(current.hasNext()){
+    // 	    // System.out.println(this);
+    // 	    preceding = current;
+    // 	    current = current.getNext();
+    // 	    Node<E> check = head.getNext();
+    // 	    while(check != current){
+    // 		if(check.getData().equals(current.getData())){
+    // 		    // System.out.println("FULFILLED IF");
+    // 		    preceding.setNext(current.getNext());
+    // 		    current = current.getNext();
+    // 		    size--;
+    // 		    break;
+    // 		}
+    // 		check = check.getNext();
+    // 	    }
+    // 	}
+    // 	return;
+    // }
+
+    //unfinished
     public void deduplicate(){
-	Object[] stack = new Object[size];
-	Node<E> current = head;
+	if(size < 2)
+	    return;
+	Node<E> current = head.getNext().getNext();
+	Node<E> preceding = head.getNext();
 	while(current.hasNext()){
+	    Node<E> check = head.getNext();
+	    //UNFINISHED
 	    current = current.getNext();
+	    preceding = preceding.getNext();
 	}
-    	return;
+	if(current.getData().equals(preceding.getData())){
+	    remove(current.getData());
+	}
+	return;
     }
 
     @Override
