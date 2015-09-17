@@ -70,6 +70,7 @@ public class Tester{
 	print("DEDUPLICATING");
 	ll.deduplicate();
 	print(ll);
+	print(ll.size());
     }
 
     public static void print(Object data){

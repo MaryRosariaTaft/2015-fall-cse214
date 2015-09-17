@@ -136,6 +136,10 @@ public class UniLinkedList<E>{
 		current = current.getNext();
 	    }
 	}
+	if(current.getData().equals(preceding.getData()))
+	    remove(current.getData());
+	// System.out.println("current: "+current.getData());
+	// System.out.println("preceding: "+preceding.getData());
 	return;
     }
 
