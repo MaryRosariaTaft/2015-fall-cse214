@@ -59,6 +59,14 @@ public class Tester{
 	ll.add("apple");
 	ll.add("pear");	
 	print(ll);
+	ll.clear();
+	print("JUST CLEARED");
+	print(ll);
+	ll.add("a");
+	ll.add("b");
+	ll.add("c");
+	ll.add("d");
+	ll.add("d");
 	print("DEDUPLICATING");
 	ll.deduplicate();
 	print(ll);
