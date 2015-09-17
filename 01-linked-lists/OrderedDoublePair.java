@@ -13,7 +13,11 @@ public class OrderedDoublePair{
 	y = 0.0;
     }
 
-    public OrderedDoublePair(int x, int y){ //not necessary--if ints are passed in the constructor with parameters (double x, double y), the ints will automatically be widened into doubles
+    //this constructor is not necessary--
+    //if ints are passed in the constructor with the
+    //parameters (double x, double y), the ints
+    //will automatically be widened into doubles
+    public OrderedDoublePair(int x, int y){ 
 	this.x = (double)x; //similarly unnecessary casting
 	this.y = (double)y; //again
     }

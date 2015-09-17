@@ -1,6 +1,17 @@
 public class Tester{
 
     public static void main(String[] args){
+
+	//ORDEREDDOUBLEPAIR TESTS
+	OrderedDoublePair a = new OrderedDoublePair();
+	OrderedDoublePair b = new OrderedDoublePair(1,1);
+	OrderedDoublePair c = new OrderedDoublePair(2.0,2.0);
+	print(a);
+	print(b);
+	print(c);
+
+	//UNILINKEDLIST TESTS
+	/*
 	UniLinkedList<String> ll = new UniLinkedList<String>();
 	print("\n\nHello World\n\n");
 	print(ll.isEmpty());
@@ -64,9 +75,9 @@ public class Tester{
 	print(ll);
 	ll.add("a");
 	ll.add("b");
-	ll.add("c");
+	//ll.add("c");
 	ll.add("d");
-	ll.add("d");
+	//ll.add("d");
 	print("DEDUPLICATING");
 	ll.deduplicate();
 	print(ll);
@@ -79,6 +90,10 @@ public class Tester{
 	print("ll: " + ll);
 	print("ll2: " + ll2);
 	print(ll.equals(ll2));
+	*/
+
+	//POINT2D TESTS
+
     }
 
     public static void print(Object data){
