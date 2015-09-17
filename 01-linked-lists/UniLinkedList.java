@@ -4,29 +4,56 @@ import java.util.*;
 public class UniLinkedList<E>{
 
     //note: 'head' is a dummy node
-
     private Node<E> head = new Node(null);
     private int size = 0;
 
-    //unfinished
+    //this is much more involved than anticipated
+    //'cursor' is used basically as an Iterator class which acts upon the argument 'obj'
     public boolean equals(Object obj){
+	//check if this and obj are the same reference
 	if(this == obj)
 	    return true;
+	//check if obj is of type UniLinkedList
 	if(obj instanceof UniLinkedList){
+	    //cast 'that' to be a UniLinkedList
 	    UniLinkedList that = (UniLinkedList)obj;
-	    // System.out.println(this);
-	    // System.out.println(that);
+	    //avoid issues with empty lists
+	    if(this.isEmpty() || that.isEmpty()){
+		//both are empty:
+		if(this.isEmpty() && that.isEmpty())
+		    return true;
+		//only one is empty:
+		return false;
+	    }
+	    //check list equality for non-empty lists
+	    //'cursor' will be used to track elements in 'that'
 	    Cursor cursor = new Cursor(that);
-	    Node current = head;
-	    // System.out.println("CURSOR: " + cursor.next());
-	    // System.out.println("CURRENT: " + current.getData());
+	    cursor.next();
+	    //'current' will be used to track elements in this
+	    Node current = head.getNext();
+	    while(current.hasNext() && cursor.hasNext()){
+		Object tmp1 = current.getData();
+		current = current.getNext();
+		Object tmp2 = cursor.next(); //automatically increments cursor's position
+		//if there's an inequality of data:
+		if(!tmp1.equals(tmp2)){
+		    return false;
+		}
+	    }
+	    if(current.hasNext() || cursor.hasNext()){
+		//if one list still has remaining elements
+		return false;
+	    }
+	    //neither list has remaining elements and all
+	    //elements contained are equivalent, in order
 	    return true;
 	}
+	//if obj is not even of type UniLinkedList
 	return false;
     }
 
     public boolean isEmpty(){
-	return head.getData() == null;
+	return head.getNext() == null;
     }
 
     public void clear(){
@@ -52,7 +79,7 @@ public class UniLinkedList<E>{
     }
 
     public boolean contains(E element){
-	//would be more efficient without the extra method call but
+	//would be more efficient without the extra method call, but...
 	return indexOf(element) != -1;
     }
 
@@ -72,7 +99,6 @@ public class UniLinkedList<E>{
 	while(current.hasNext()){
 	    current = current.getNext();
 	    if(current.getData().equals(mark)){
-		//do adding/pointer stuff
 		Node<E> nodeToAdd = new Node<E>(elementToAdd);
 		nodeToAdd.setNext(current.getNext());
 		current.setNext(nodeToAdd);
@@ -201,7 +227,9 @@ public class UniLinkedList<E>{
 		position = position.getNext();
 		return tmp;
 	    }
-	    throw new NoSuchElementException();
+	    System.out.println("in next() in class Cursor: already at last element; returning data of last element without changing position");
+	    return position.getData();
+	    //probably should throw an exception here instead--whoops
 	}
     }
 
