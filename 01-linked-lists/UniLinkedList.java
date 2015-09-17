@@ -32,9 +32,16 @@ public class UniLinkedList<E>{
 	return size;
     }
 
-    //unfinished
     public int indexOf(E element){
-	//???
+	Node<E> current = head;
+	int index = -1;
+	while(current.hasNext()){
+	    current = current.getNext();
+	    index++;
+	    if(current.getData().equals(element)){
+		return index;
+	    }
+	}
 	return -1;
     }
 
@@ -54,10 +61,20 @@ public class UniLinkedList<E>{
     	return true;
     }
 
-    //unfinished
-    // public boolean addAfter(E mark, E elementToAdd){
-    // 	return;
-    // }
+    public boolean addAfter(E mark, E elementToAdd){
+	Node<E> current = head;
+	while(current.hasNext()){
+	    current = current.getNext();
+	    if(current.getData().equals(mark)){
+		//do adding/pointer stuff
+		Node<E> nodeToAdd = new Node<E>(elementToAdd);
+		nodeToAdd.setNext(current.getNext());
+		current.setNext(nodeToAdd);
+		return true;
+	    }
+	}
+    	return false;
+    }
 
     //unfinished
     // public boolean addFirst(E element){

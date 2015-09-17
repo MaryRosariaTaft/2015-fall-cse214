@@ -14,6 +14,16 @@ public class Tester{
 	print(ll);
 	ll.add("whoops");
 	print(ll);
+	print(ll.size());
+	print(ll.indexOf("whoops"));
+	print("-------");
+	print(ll.addAfter("hello", "dear"));
+	print(ll);
+	print(ll.addAfter("nonexistent","test"));
+	print(ll);
+	print(ll.contains("dear"));
+	print(ll.contains("nonexistent"));
+	
     }
 
     public static void print(Object data){
