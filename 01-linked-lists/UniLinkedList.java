@@ -6,18 +6,21 @@ public class UniLinkedList<E>{
     //note: 'head' is a dummy node
 
     private Node<E> head = new Node(null);
-    private Cursor cursor = new Cursor(this); //???
     private int size = 0;
 
     //unfinished
     public boolean equals(Object obj){
 	if(this == obj)
 	    return true;
-	if(obj instanceof UniLinkedList){ //<E>???
+	if(obj instanceof UniLinkedList){
 	    UniLinkedList that = (UniLinkedList)obj;
-	    boolean areEqual = false;
-	    //UNFINISHED
-	    return areEqual;
+	    // System.out.println(this);
+	    // System.out.println(that);
+	    Cursor cursor = new Cursor(that);
+	    Node current = head;
+	    // System.out.println("CURSOR: " + cursor.next());
+	    // System.out.println("CURRENT: " + current.getData());
+	    return true;
 	}
 	return false;
     }
@@ -138,11 +141,10 @@ public class UniLinkedList<E>{
 	}
 	if(current.getData().equals(preceding.getData()))
 	    remove(current.getData());
-	// System.out.println("current: "+current.getData());
-	// System.out.println("preceding: "+preceding.getData());
 	return;
     }
 
+    //helper to deduplicate()
     private boolean alreadyHas(Node<E> node){
 	Node<E> checker = head.getNext();
 	while(checker != node){
@@ -186,12 +188,21 @@ public class UniLinkedList<E>{
 	}
     }
     
+    //I don't understand why this is static
     public static class Cursor<E>{
-	private Node<E> position; //Node???
-	//possibly add int field index
+	private Node<E> position;
 	private Cursor(UniLinkedList<E> list){position = list.head;}
 	public boolean hasNext(){return position.hasNext();}
-	public E next(){return position.getNext().getData();}
+	//changes position to the next Node but returns data of the original
+	//(based on the way next() works in the Iterator class)
+	public E next(){
+	    if(hasNext()){
+		E tmp = position.getData();
+		position = position.getNext();
+		return tmp;
+	    }
+	    throw new NoSuchElementException();
+	}
     }
 
 }

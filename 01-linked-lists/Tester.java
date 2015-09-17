@@ -71,6 +71,14 @@ public class Tester{
 	ll.deduplicate();
 	print(ll);
 	print(ll.size());
+	UniLinkedList<String> ll2 = new UniLinkedList<String>();
+	ll2.add("a");
+	ll2.add("b");
+	ll2.add("c");
+	ll2.add("d");
+	print("ll: " + ll);
+	print("ll2: " + ll2);
+	print(ll.equals(ll2));
     }
 
     public static void print(Object data){
