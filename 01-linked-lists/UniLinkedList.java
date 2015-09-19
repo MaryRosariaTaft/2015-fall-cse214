@@ -35,14 +35,20 @@ public class UniLinkedList<E>{
 		System.out.println("that cursor's data (tmp2): " + tmp2);
 		if(!tmp1.equals(tmp2)){
 		    System.out.println("tmp1 and tmp2 are not equal");
+		    this.resetCursorToHead();
+		    that.resetCursorToHead();
 		    return false;
 		}
 	    }
 	    if(this.cursor.hasNext() || that.cursor.hasNext()){
 		System.out.println("one of the lists still has elements");
+		this.resetCursorToHead();
+		that.resetCursorToHead();
 		return false;
 	    }
 	    System.out.println("the lists are equal");
+	    this.resetCursorToHead();
+	    that.resetCursorToHead();
 	    return true;
 	}
 	//if obj is not even of type UniLinkedList
@@ -190,6 +196,10 @@ public class UniLinkedList<E>{
 	return false;
     }
 
+    public void resetCursorToHead(){
+	cursor.resetPositionToHead(this);
+    }
+
     @Override
     public int hashCode(){
 	return head != null ? head.hashCode() : 0;
@@ -247,6 +257,9 @@ public class UniLinkedList<E>{
 	    //probably should've thrown an exception here instead of returning--whoops
 	    //but I chose to just return the last element because it makes iteration
 	    //very easy, as implemented in my UniLinkedList's equals() method
+	}
+	private void resetPositionToHead(UniLinkedList<E> list){
+	    position = list.head;
 	}
     }
 

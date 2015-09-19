@@ -92,25 +92,28 @@ public class Tester{
 	ll2.add("b");
 	ll2.add("c");
 	ll2.add("d");
-	print("ll: " + ll);
-	print("ll2: " + ll2);
-	print("ll and ll2 are equal: " + ll.equals(ll2));
-	ll.remove("d");
-	print("ll: " + ll);
-	print("ll2: " + ll2);
-	print("ll and ll2 are equal: " + ll.equals(ll2));
-	ll.remove("d");
-	print("ll: " + ll);
-	print("ll2: " + ll2);
-	print("adding 'c' after 'a' in ll: " + ll.addAfter("a", "c"));
-	print("ll: " + ll);
-	print("adding 'e' after 'd' in ll2: " + ll2.addAfter("d", "e"));
-	print("ll2: " + ll2);
-	// print("adding 'd' after 'e' in ll: " + ll.addAfter("e", "d"));
 	// print("ll: " + ll);
-	print("removing all occurences of 'w' from ll2: " + ll2.removeAll("w"));
-	print("ll2: " + ll2);
-	//print("ll and ll2 are equal: " + ll.equals(ll2));
+	// print("ll2: " + ll2);
+	// print("ll and ll2 are equal: " + ll.equals(ll2));
+	// ll.remove("d");
+	// print("ll: " + ll);
+	// print("ll2: " + ll2);
+	// print("ll and ll2 are equal: " + ll.equals(ll2));
+	// ll.remove("d");
+	// print("ll: " + ll);
+	// print("ll2: " + ll2);
+	// print("adding 'c' after 'a' in ll: " + ll.addAfter("a", "c"));
+	// print("ll: " + ll);
+	// print("adding 'e' after 'd' in ll2: " + ll2.addAfter("d", "e"));
+	// print("ll2: " + ll2);
+	// //following two lines are intentionally commented out
+	// //because the first appropriately throws an exception
+	// // print("adding 'd' after 'e' in ll: " + ll.addAfter("e", "d"));
+	// // print("ll: " + ll);
+	// print("removing all occurences of 'w' from ll2: " + ll2.removeAll("w"));
+	// print("ll2: " + ll2);
+	print("ll and ll2 are equal: " + ll.equals(ll2));	
+	print("ll and ll2 are equal: " + ll.equals(ll2));
 	//DOESN'T WORK
 
 	//POINT2D TESTS
