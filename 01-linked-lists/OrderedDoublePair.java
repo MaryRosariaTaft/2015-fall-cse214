@@ -49,6 +49,11 @@ public class OrderedDoublePair{
 	return false;
     }
 
+    public double getX(){return x;} 
+    public void setX(double x){this.x = x;}
+    public double getY(){return y;}
+    public void setY(double y){this.y = y;}
+
     @Override
     public int hashCode(){
 	int result;
@@ -58,6 +63,7 @@ public class OrderedDoublePair{
 	return 31 * result * (int)(temp^(temp>>>32));
     }
 
+    //should this also have the @Override annotation?
     public String toString(){
 	return "("+x+","+y+")";
     }
