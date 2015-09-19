@@ -8,7 +8,17 @@ public class UniLinkedList<E>{
     private int size = 0;
 
     //this is much more involved than anticipated
-    //'cursor' is used basically as an Iterator class which acts upon the argument 'obj'
+    //
+    //'cursor' here is used basically as an Iterator class which
+    //acts upon the argument 'obj'
+    //
+    //NOTE: after reading about nested static classes, I realize (I believe...)
+    //that I could've used *separate* cursors for EACH 'this' and 'that'
+    //and then had code with parallel structure (meaning I could've iterated
+    //through both LinkedLists the *same way,* rather than iterating through
+    //Nodes directly for 'this' while using 'next()' for 'that')
+    //
+    //However, this works, so I'm gonna let it be
     public boolean equals(Object obj){
 	//check if this and obj are the same reference
 	if(this == obj)
@@ -54,6 +64,7 @@ public class UniLinkedList<E>{
 
     public boolean isEmpty(){
 	return head.getNext() == null;
+	//or return size == 0;
     }
 
     public void clear(){
@@ -140,7 +151,7 @@ public class UniLinkedList<E>{
     }
 
     //would be more useful if return type were
-    //an int, num times element was removed
+    //an int indicating the num times element was removed
     public boolean removeAll(E element){
 	if(!contains(element))
 	    return false;
@@ -150,6 +161,11 @@ public class UniLinkedList<E>{
 	return true;
     }
 
+    //*maintains* the FIRST instance of a Node with any given element
+    //thus I didn't factor out code by using the remove() method, which
+    //*removes* the first instance of aforementioned Node
+    //(except in the final case, because if the two Nodes of equivalent data
+    //are *adjacent,* it effectively doesn't matter which of the two is removed)
     public void deduplicate(){
 	if(size < 2)
 	    return;
@@ -186,6 +202,7 @@ public class UniLinkedList<E>{
 	return head != null ? head.hashCode() : 0;
     }
 
+    //should this also have the @Override annotation?
     public String toString(){
 	String str = "";
 	if(size == 0) return "[[empty]]";
@@ -198,6 +215,9 @@ public class UniLinkedList<E>{
 	return str;
     }
     
+    //NOTE ABOUT STATIC NESTED CLASSES (from http://docs.oracle.com/javase/tutorial/java/javaOO/nested.html):
+    //"A static nested class interacts with the instance members of its outer class (and other classes) just like any other top-level class. In effect, a static nested class is behaviorally a top-level class that has been nested in another top-level class for packaging convenience."
+
     private static class Node<E>{	
 	private E data;
 	private Node<E> next;
@@ -212,14 +232,15 @@ public class UniLinkedList<E>{
 	    int result = data != null ? data.hashCode() : 0;
 	    return 31 * result + (next != null ? next.hashCode() : 0);
 	}
+	//could've made life easier by putting a toString() in here, but
+	//it's not in the API, so I hesistated to add a public method
     }
     
-    //I don't understand why this is static
     public static class Cursor<E>{
 	private Node<E> position;
 	private Cursor(UniLinkedList<E> list){position = list.head;}
 	public boolean hasNext(){return position.hasNext();}
-	//changes position to the next Node but returns data of the original
+	//next() changes 'position' to the next Node *but* returns data of the *original*
 	//(based on the way next() works in the Iterator class)
 	public E next(){
 	    if(hasNext()){
@@ -229,7 +250,9 @@ public class UniLinkedList<E>{
 	    }
 	    System.out.println("in next() in class Cursor: already at last element; returning data of last element without changing position");
 	    return position.getData();
-	    //probably should throw an exception here instead--whoops
+	    //probably should've thrown an exception here instead of returning--whoops
+	    //but I chose to just return the last element because it makes iteration
+	    //very easy, as implemented in my UniLinkedList's equals() method
 	}
     }
 
