@@ -5,57 +5,44 @@ public class UniLinkedList<E>{
 
     //note: 'head' is a dummy node
     private Node<E> head = new Node(null);
+    private Cursor cursor = new Cursor(this);
     private int size = 0;
 
-    //this is much more involved than anticipated
-    //
-    //'cursor' here is used basically as an Iterator class which
-    //acts upon the argument 'obj'
-    //
-    //NOTE: after reading about nested static classes, I realize (I believe...)
-    //that I could've used *separate* cursors for EACH 'this' and 'that'
-    //and then had code with parallel structure (meaning I could've iterated
-    //through both LinkedLists the *same way,* rather than iterating through
-    //Nodes directly for 'this' while using 'next()' for 'that')
-    //
-    //However, this works, so I'm gonna let it be
     public boolean equals(Object obj){
-	//check if this and obj are the same reference
-	if(this == obj)
+	if(this == obj){
+	    System.out.println("same object");
 	    return true;
-	//check if obj is of type UniLinkedList
+	}
 	if(obj instanceof UniLinkedList){
-	    //cast 'that' to be a UniLinkedList
+	    System.out.println("obj is of type UniLinkedList");
 	    UniLinkedList that = (UniLinkedList)obj;
-	    //avoid issues with empty lists
 	    if(this.isEmpty() || that.isEmpty()){
-		//both are empty:
-		if(this.isEmpty() && that.isEmpty())
+		if(this.isEmpty() && that.isEmpty()){
+		    System.out.println("both lists are empty");
 		    return true;
-		//only one is empty:
+		}
+		System.out.println("one list is empty, one is not");
 		return false;
 	    }
-	    //check list equality for non-empty lists
-	    //'cursor' will be used to track elements in 'that'
-	    Cursor cursor = new Cursor(that);
-	    cursor.next();
-	    //'current' will be used to track elements in this
-	    Node current = head.getNext();
-	    while(current.hasNext() && cursor.hasNext()){
-		Object tmp1 = current.getData();
-		current = current.getNext();
-		Object tmp2 = cursor.next(); //automatically increments cursor's position
-		//if there's an inequality of data:
+	    Object a = this.cursor.next();
+	    Object b = that.cursor.next();
+	    System.out.println("this cursor's head: " + a);
+	    System.out.println("that cursor's head: " + b);
+	    while(this.cursor.hasNext() && that.cursor.hasNext()){
+		Object tmp1 = this.cursor.next(); //automatically increments position
+		Object tmp2 = that.cursor.next();
+		System.out.println("this cursor's data (tmp1): " + tmp1);
+		System.out.println("that cursor's data (tmp2): " + tmp2);
 		if(!tmp1.equals(tmp2)){
+		    System.out.println("tmp1 and tmp2 are not equal");
 		    return false;
 		}
 	    }
-	    if(current.hasNext() || cursor.hasNext()){
-		//if one list still has remaining elements
+	    if(this.cursor.hasNext() || that.cursor.hasNext()){
+		System.out.println("one of the lists still has elements");
 		return false;
 	    }
-	    //neither list has remaining elements and all
-	    //elements contained are equivalent, in order
+	    System.out.println("the lists are equal");
 	    return true;
 	}
 	//if obj is not even of type UniLinkedList
@@ -105,6 +92,7 @@ public class UniLinkedList<E>{
     	return true;
     }
 
+    //either returns true or throws exception (in what case would/could this return false?)
     public boolean addAfter(E mark, E elementToAdd){
 	Node<E> current = head;
 	while(current.hasNext()){
@@ -117,7 +105,7 @@ public class UniLinkedList<E>{
 		return true;
 	    }
 	}
-    	return false;
+    	throw new NoSuchElementException(mark.toString() + " is not present in this UniLinkedList, " + this);
     }
 
     //in what case would this return false?
@@ -138,6 +126,8 @@ public class UniLinkedList<E>{
 	    return false;
 	Node<E> current = head;
 	Node<E> preceding;
+	//could utilize contains() here, but it is not necessary
+	//and adds a layer of inefficiency
 	while(current.hasNext()){	
 	    preceding = current;
 	    current = current.getNext();
@@ -147,14 +137,17 @@ public class UniLinkedList<E>{
 		return true;
 	    }
 	}
+	System.out.println("remove(E element): cannot remove '" + element + "' from this UniLinkedList, " + this + ", because it is not present");
     	return false;
     }
 
     //would be more useful if return type were
     //an int indicating the num times element was removed
     public boolean removeAll(E element){
-	if(!contains(element))
+	if(!contains(element)){
+	    System.out.println("removeAll(E element): cannot remove '" + element + "' from this UniLinkedList, " + this + ", because it is not present");
 	    return false;
+	}
 	while(contains(element)){
 	    remove(element);
 	}
@@ -204,15 +197,16 @@ public class UniLinkedList<E>{
 
     //should this also have the @Override annotation?
     public String toString(){
-	String str = "";
-	if(size == 0) return "[[empty]]";
+	if(size == 0)
+	    return "[[emptyUniLinkedList]]";
+	String str = "(";
 	Node<E> current = head.getNext();
 	while(current.hasNext()){
 	    str += current.getData() + " -> ";
 	    current = current.getNext();
 	}
 	str += current.getData();
-	return str;
+	return str + ")";
     }
     
     //NOTE ABOUT STATIC NESTED CLASSES (from http://docs.oracle.com/javase/tutorial/java/javaOO/nested.html):
