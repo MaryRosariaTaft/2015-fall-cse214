@@ -33,7 +33,21 @@ public class Point2D{
 
     //computes centroid (arithmetic mean of all points in the given list)
     public static OrderedDoublePair centroid(UniLinkedList<OrderedDoublePair> points){
-	return new OrderedDoublePair(0,0);
+	if(points.isEmpty())
+	    throw new IllegalArgumentException("cannot compute centroid of an empty list");
+	double sumX = 0;
+	double sumY = 0;
+	// nope UniLinkedList<OrderedDoublePair>.Cursor cursor = new UniLinkedList<OrderedDoublePair>.Cursor(points);
+	// also nope UniLinkedList.Cursor cursor = points.new Cursor(points);
+
+	//
+	// cursor.next(); //ignore head
+	// while(cursor.hasNext()){
+	//     OrderedDoublePair pt = cursor.next();
+	//     sumX += pt.getX();
+	//     sumY += pt.getY();
+	// }
+	return new OrderedDoublePair(sumX/points.size(), sumY/points.size());
     }
 
     //returns point closest to the origin
