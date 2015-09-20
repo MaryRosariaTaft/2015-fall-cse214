@@ -180,13 +180,17 @@ public class UniLinkedList<E>{
 		current = current.getNext();
 	    }
 	}
-	if(current.getData().equals(preceding.getData()))
-	    remove(current.getData());
+	if(alreadyHas(current)){
+	    preceding.setNext(current.getNext());
+	    current = current.getNext();
+	    size--;
+	}
 	return;
     }
 
     //helper to deduplicate()
     private boolean alreadyHas(Node<E> node){
+	// System.out.println("in alreadyHas");
 	Node<E> checker = head.getNext();
 	while(checker != node){
 	    if(checker.getData().equals(node.getData()))
@@ -194,6 +198,15 @@ public class UniLinkedList<E>{
 	    checker = checker.getNext();
 	}
 	return false;
+    }
+
+    //I had to add the following two methods (regarding Cursors) to get my equals() method
+    //(in this class, UniLinkedList) and my centroid() method (in Point2D) to work
+    //Don't know how else to implement iteration from the beginning of the list
+    //However, my use of Cursor seems incomplete 
+
+    public Cursor getCursor(){
+	return cursor;
     }
 
     public void resetCursorToHead(){
@@ -252,7 +265,7 @@ public class UniLinkedList<E>{
 		position = position.getNext();
 		return tmp;
 	    }
-	    System.out.println("in next() in class Cursor: already at last element; returning data of last element without changing position");
+	    // System.out.println("in next() in class Cursor: already at last element; returning data of last element without changing position");
 	    return position.getData();
 	    //probably should've thrown an exception here instead of returning--whoops
 	    //but I chose to just return the last element because it makes iteration

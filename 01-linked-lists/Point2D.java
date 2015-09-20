@@ -37,28 +37,78 @@ public class Point2D{
 	    throw new IllegalArgumentException("cannot compute centroid of an empty list");
 	double sumX = 0;
 	double sumY = 0;
-	// nope UniLinkedList<OrderedDoublePair>.Cursor cursor = new UniLinkedList<OrderedDoublePair>.Cursor(points);
-	// also nope UniLinkedList.Cursor cursor = points.new Cursor(points);
-
-	//
-	// cursor.next(); //ignore head
-	// while(cursor.hasNext()){
-	//     OrderedDoublePair pt = cursor.next();
-	//     sumX += pt.getX();
-	//     sumY += pt.getY();
-	// }
+	UniLinkedList.Cursor cursor = points.getCursor();
+	points.resetCursorToHead();
+	cursor.next(); //ignore head
+	while(cursor.hasNext()){
+	    OrderedDoublePair pt = (OrderedDoublePair)cursor.next();
+	    sumX += pt.getX();
+	    sumY += pt.getY();
+	}
+	//account for the one remaining list element
+	OrderedDoublePair pt = (OrderedDoublePair)cursor.next();
+	sumX += pt.getX();
+	sumY += pt.getY();
+	// System.out.println("sumX: " + sumX);
+	// System.out.println("sumY: " + sumY);
+	points.resetCursorToHead();
 	return new OrderedDoublePair(sumX/points.size(), sumY/points.size());
     }
 
     //returns point closest to the origin
     public static OrderedDoublePair smallest(UniLinkedList<OrderedDoublePair> points){
-	return new OrderedDoublePair(0,0);
-	
+	if(points.size() == 0)
+	    throw new IllegalArgumentException("cannot compute smallest element of an empty list");
+	UniLinkedList.Cursor cursor = points.getCursor();
+	points.resetCursorToHead();
+	cursor.next(); //ignores head
+	OrderedDoublePair smallest = (OrderedDoublePair)cursor.next();
+	double smallestDistance = distance(smallest,OrderedDoublePair.ORIGIN);
+	while(cursor.hasNext()){
+	    OrderedDoublePair pt = (OrderedDoublePair)cursor.next();
+	    double dist = distance(pt, OrderedDoublePair.ORIGIN);
+	    if(dist < smallestDistance){
+		smallest = pt;
+		smallestDistance = dist;
+	    }
+	}
+	//account for last element in list
+	OrderedDoublePair pt = (OrderedDoublePair)cursor.next();
+	double dist = distance(pt, OrderedDoublePair.ORIGIN);
+	if(dist < smallestDistance){
+	    smallest = pt;
+	    smallestDistance = dist;
+	}
+	points.resetCursorToHead();
+	return smallest;	
     }
 
     //returns point farthest from the origin
     public static OrderedDoublePair largest(UniLinkedList<OrderedDoublePair> points){
-	return new OrderedDoublePair(0,0);
+	if(points.size() == 0)
+	    throw new IllegalArgumentException("cannot compute largest element of an empty list");
+	UniLinkedList.Cursor cursor = points.getCursor();
+	points.resetCursorToHead();
+	cursor.next(); //ignores head
+	OrderedDoublePair largest = (OrderedDoublePair)cursor.next();
+	double largestDistance = distance(largest,OrderedDoublePair.ORIGIN);
+	while(cursor.hasNext()){
+	    OrderedDoublePair pt = (OrderedDoublePair)cursor.next();
+	    double dist = distance(pt, OrderedDoublePair.ORIGIN);
+	    if(dist > largestDistance){
+		largest = pt;
+		largestDistance = dist;
+	    }
+	}
+	//account for last element in list
+	OrderedDoublePair pt = (OrderedDoublePair)cursor.next();
+	double dist = distance(pt, OrderedDoublePair.ORIGIN);
+	if(dist > largestDistance){
+	    largest = pt;
+	    largestDistance = dist;
+	}
+	points.resetCursorToHead();
+	return largest;	
 
     }
 
@@ -68,8 +118,8 @@ public class Point2D{
     //find nearest and farthest points
     //remove all points from original list whose coordinates sum to an even number
     //print point closest to centroid after deduplication (huh...)
-    // public static void main(String[] args){
-
-    // }
+    public static void main(String[] args){
+	return;
+    }
 
 }
