@@ -55,18 +55,17 @@ public class Point2D{
 	return new OrderedDoublePair(sumX/points.size(), sumY/points.size());
     }
 
-    //returns point closest to the origin
-    public static OrderedDoublePair smallest(UniLinkedList<OrderedDoublePair> points){
+    private static OrderedDoublePair closestTo(OrderedDoublePair point, UniLinkedList<OrderedDoublePair> points){
 	if(points.size() == 0)
 	    throw new IllegalArgumentException("cannot compute smallest element of an empty list");
 	UniLinkedList.Cursor cursor = points.getCursor();
 	points.resetCursorToHead();
 	cursor.next(); //ignores head
 	OrderedDoublePair smallest = (OrderedDoublePair)cursor.next();
-	double smallestDistance = distance(smallest,OrderedDoublePair.ORIGIN);
+	double smallestDistance = distance(smallest, point);
 	while(cursor.hasNext()){
 	    OrderedDoublePair pt = (OrderedDoublePair)cursor.next();
-	    double dist = distance(pt, OrderedDoublePair.ORIGIN);
+	    double dist = distance(pt, point);
 	    if(dist < smallestDistance){
 		smallest = pt;
 		smallestDistance = dist;
@@ -74,13 +73,42 @@ public class Point2D{
 	}
 	//account for last element in list
 	OrderedDoublePair pt = (OrderedDoublePair)cursor.next();
-	double dist = distance(pt, OrderedDoublePair.ORIGIN);
+	double dist = distance(pt, point);
 	if(dist < smallestDistance){
 	    smallest = pt;
 	    smallestDistance = dist;
 	}
 	points.resetCursorToHead();
-	return smallest;	
+	return smallest;		
+    } 
+
+    //returns point closest to the origin
+    public static OrderedDoublePair smallest(UniLinkedList<OrderedDoublePair> points){
+	// if(points.size() == 0)
+	//     throw new IllegalArgumentException("cannot compute smallest element of an empty list");
+	// UniLinkedList.Cursor cursor = points.getCursor();
+	// points.resetCursorToHead();
+	// cursor.next(); //ignores head
+	// OrderedDoublePair smallest = (OrderedDoublePair)cursor.next();
+	// double smallestDistance = distance(smallest,OrderedDoublePair.ORIGIN);
+	// while(cursor.hasNext()){
+	//     OrderedDoublePair pt = (OrderedDoublePair)cursor.next();
+	//     double dist = distance(pt, OrderedDoublePair.ORIGIN);
+	//     if(dist < smallestDistance){
+	// 	smallest = pt;
+	// 	smallestDistance = dist;
+	//     }
+	// }
+	// //account for last element in list
+	// OrderedDoublePair pt = (OrderedDoublePair)cursor.next();
+	// double dist = distance(pt, OrderedDoublePair.ORIGIN);
+	// if(dist < smallestDistance){
+	//     smallest = pt;
+	//     smallestDistance = dist;
+	// }
+	// points.resetCursorToHead();
+	// return smallest;	
+	return closestTo(OrderedDoublePair.ORIGIN, points);
     }
 
     //returns point farthest from the origin
@@ -112,12 +140,16 @@ public class Point2D{
 
     }
 
-    //reads command-line input in the form "x y" (line by line) until user types "done"
-    //compute centroid
-    //remove duplicates
-    //find nearest and farthest points
-    //remove all points from original list whose coordinates sum to an even number
-    //print point closest to centroid after deduplication (huh...)
+    //UNFINISHED
+    private static UniLinkedList<OrderedDoublePair> filterEvens(UniLinkedList<OrderedDoublePair> points){
+	//for each in points
+	//ODP tmp = each.getData()
+	//if(sum(vals in tmp) % 2 == 0) points.remove(tmp)
+	//return points
+	//note: depending on whether input is pass-by this might work without returning stuff, might just edit the parameter; unsure
+	return points;
+    }
+
     public static void main(String[] args){
 	UniLinkedList<OrderedDoublePair> input = new UniLinkedList<OrderedDoublePair>();
 	Scanner sc = new Scanner(System.in);
@@ -134,12 +166,24 @@ public class Point2D{
 		}
 		double xcor = Double.parseDouble(coordinates[0]);
 		double ycor = Double.parseDouble(coordinates[1]);
-		System.out.println(Arrays.toString(coordinates));
+		// print(Arrays.toString(coordinates)); //for testing
 		input.add(new OrderedDoublePair(xcor, ycor));
 	    }
 	}
-	System.out.println(input);
+	// print(input); //for testing
+	print("Centroid = " + centroid(input));
+	input.deduplicate();
+	print("Centroid of unique points: = " + centroid(input));
+        print("Point closest to the origin is " + smallest(input));
+        print("Point farthest from the origin is " + largest(input));
+	//DO FILTERING STUFF
+	print("After filtering out even-summed points, the list is " + input);
+	print("Point closest to the centroid (after deduplication of list data) is " + closestTo(centroid(input), input));
 	return;
+    }
+
+    public static void print(Object data){
+	System.out.println(data);
     }
 
 }
