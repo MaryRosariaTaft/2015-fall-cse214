@@ -6,19 +6,17 @@ public class OrderedDoublePair{
     private double x, y;
     public static final OrderedDoublePair ORIGIN = new OrderedDoublePair(0, 0);
 
-    //CONSTRUCTORS
-
     public OrderedDoublePair(){
 	x = 0.0;
 	y = 0.0;
     }
 
-    //this constructor is not necessary--
-    //if ints are passed in the constructor with the
+    //the following constructor is not necessary--
+    //--if ints are passed in the constructor with the
     //parameters (double x, double y), the ints
     //will automatically be widened into doubles
     public OrderedDoublePair(int x, int y){ 
-	this.x = (double)x; //similarly unnecessary casting
+	this.x = (double)x; //similarly, this casting is unnecessary
 	this.y = (double)y; //again
     }
 
@@ -26,8 +24,6 @@ public class OrderedDoublePair{
 	this.x = x;
 	this.y = y;
     }
-
-    //CLASS METHODS
 
     public boolean equals(Object obj){
 	if(this == obj)
