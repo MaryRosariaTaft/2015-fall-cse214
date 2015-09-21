@@ -57,7 +57,7 @@ public class Point2D{
 
     private static OrderedDoublePair closestTo(OrderedDoublePair point, UniLinkedList<OrderedDoublePair> points){
 	if(points.size() == 0)
-	    throw new IllegalArgumentException("cannot compute smallest element of an empty list");
+	    throw new IllegalArgumentException("cannot compute the element of a list closest to a given point if that list is empty");
 	UniLinkedList.Cursor cursor = points.getCursor();
 	points.resetCursorToHead();
 	cursor.next(); //ignores head
@@ -111,6 +111,11 @@ public class Point2D{
 	return closestTo(OrderedDoublePair.ORIGIN, points);
     }
 
+    //NOTE: I could similarly add a farthestFrom() function which takes two parameters here
+    //OTHER NOTE: actually, I could have a distance-determining method which
+    //takes a point, a set of points, and a toggler (smallest or largest); and
+    //then run *all* the methods through that one
+
     //returns point farthest from the origin
     public static OrderedDoublePair largest(UniLinkedList<OrderedDoublePair> points){
 	if(points.size() == 0)
@@ -140,13 +145,30 @@ public class Point2D{
 
     }
 
-    //UNFINISHED
+    //removes Nodes<OrderedDoublePair> whose x- and y-cors
+    //sum to an even number from the UniLinkedList
+    //edits 'points' and returns the updated UniLinkedList
     private static UniLinkedList<OrderedDoublePair> filterEvens(UniLinkedList<OrderedDoublePair> points){
-	//for each in points
-	//ODP tmp = each.getData()
-	//if(sum(vals in tmp) % 2 == 0) points.remove(tmp)
-	//return points
-	//note: depending on whether input is pass-by this might work without returning stuff, might just edit the parameter; unsure
+	if(points.size() == 0)
+	    throw new IllegalArgumentException("cannot filter an empty list");
+	UniLinkedList.Cursor cursor = points.getCursor();
+	points.resetCursorToHead();
+	OrderedDoublePair current = (OrderedDoublePair)cursor.next(); //current = head
+	double sum = 0; //since 'current' is initialized to head, initialize sum to 0 (not necessary, though)
+	while(cursor.hasNext()){
+	    current = (OrderedDoublePair)cursor.next();
+	    sum = current.getX() + current.getY();
+	    if(sum % 2 == 0){
+		points.remove(current);
+	    }
+	}
+	//account for last element in list
+	current = (OrderedDoublePair)cursor.next();
+	sum = current.getX() + current.getY();
+	if(sum % 2 == 0){
+	    points.remove(current);
+	}
+	points.resetCursorToHead();
 	return points;
     }
 
@@ -176,13 +198,15 @@ public class Point2D{
 	print("Centroid of unique points: = " + centroid(input));
         print("Point closest to the origin is " + smallest(input));
         print("Point farthest from the origin is " + largest(input));
-	//DO FILTERING STUFF
-	print("After filtering out even-summed points, the list is " + input);
+	print("After filtering out even-summed points, the list is " + filterEvens(input));
+	// print("has input changed? here it is: " + input); //test that 'input' has
+	//actually been edited after passing through filterEvens()
+	//(although this should've been apparent based on previous methods)
 	print("Point closest to the centroid (after deduplication of list data) is " + closestTo(centroid(input), input));
 	return;
     }
 
-    public static void print(Object data){
+    private static void print(Object data){
 	System.out.println(data);
     }
 
