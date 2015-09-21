@@ -119,6 +119,26 @@ public class Point2D{
     //remove all points from original list whose coordinates sum to an even number
     //print point closest to centroid after deduplication (huh...)
     public static void main(String[] args){
+	UniLinkedList<OrderedDoublePair> input = new UniLinkedList<OrderedDoublePair>();
+	Scanner sc = new Scanner(System.in);
+	boolean done = false;
+	//ADD A PRINTLN TO GIVE USER INSTRUCTIONS
+	while(!done){
+	    String str = sc.nextLine();
+	    if(str.toLowerCase().contains("done")){
+		done = true;
+	    }else{
+		String[] coordinates = str.split("[ ]+");
+		if(coordinates.length != 2){
+		    throw new IllegalArgumentException("wrong number of arguments");
+		}
+		double xcor = Double.parseDouble(coordinates[0]);
+		double ycor = Double.parseDouble(coordinates[1]);
+		System.out.println(Arrays.toString(coordinates));
+		input.add(new OrderedDoublePair(xcor, ycor));
+	    }
+	}
+	System.out.println(input);
 	return;
     }
 
