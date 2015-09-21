@@ -6,6 +6,9 @@ public class OrderedDoublePair{
     private double x, y;
     public static final OrderedDoublePair ORIGIN = new OrderedDoublePair(0, 0);
 
+
+    //CONSTRUCTORS:
+
     public OrderedDoublePair(){
 	x = 0.0;
 	y = 0.0;
@@ -25,6 +28,17 @@ public class OrderedDoublePair{
 	this.y = y;
     }
 
+
+    //GETTERS & SETTERS:
+    public double getX(){return x;} 
+    public void setX(double x){this.x = x;}
+    public double getY(){return y;}
+    public void setY(double y){this.y = y;}
+
+
+    //OVERRIDING METHODS (kinda sorta):
+
+    //should this have the @Override annotation?
     public boolean equals(Object obj){
 	if(this == obj)
 	    return true;
@@ -45,18 +59,13 @@ public class OrderedDoublePair{
 	return false;
     }
 
-    public double getX(){return x;} 
-    public void setX(double x){this.x = x;}
-    public double getY(){return y;}
-    public void setY(double y){this.y = y;}
-
     @Override
     public int hashCode(){
 	int result;
 	long temp = Double.doubleToLongBits(x);
 	result = (int)(temp^(temp>>>32));
 	temp = Double.doubleToLongBits(y);
-	return 31 * result * (int)(temp^(temp>>>32));
+	return 31 * result + (int)(temp^(temp>>>32));
     }
 
     //should this also have the @Override annotation?

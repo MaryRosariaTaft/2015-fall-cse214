@@ -9,7 +9,11 @@ public class UniLinkedList<E>{
     private Cursor cursor = new Cursor(this);
     private int size = 0;
 
-    //no constructor
+
+    //NO CONSTRUCTOR
+
+
+    //METHODS:
 
     public E head(){
     	return head.getData();
@@ -161,18 +165,18 @@ public class UniLinkedList<E>{
     }
 
 
-    //GETTERS AND SETTERS
+    //GETTERS & SETTERS:
 
-    //SIZE:
+    //for 'size':
     //no getSize() method; already have size()
     //set setSize(int newSize) method; that would be horrendous
 
-    //HEAD:
+    //for 'head':
     //not getHead() method, because it would be useless outside of UniLinkedList,
     //because Nodes can't be instantiated aboutside of UniLinkedList
     //no setHead(Node<E> newHead) method; that would also be horrendous
 
-    //CURSOR:
+    //for 'cursor':
     public Cursor getCursor(){return cursor;} //finally!
     //in lieu of a setCursor(Node<E> position) method:
     public void resetCursorToHead(){cursor.resetPositionToHead(this);}
@@ -188,12 +192,9 @@ public class UniLinkedList<E>{
     //Nodes can't be instantiated in, for example, Point2D.)
 
 
-    @Override
-    public int hashCode(){
-	return head != null ? head.hashCode() : 0;
-    }
+    //OVERRIDING METHODS:
 
-    //should this also have the @Override annotation?
+    //should this have the @Override annotation?
     public boolean equals(Object obj){
 	if(this == obj){
 	    // System.out.println("same object");
@@ -241,6 +242,11 @@ public class UniLinkedList<E>{
 	return false;
     }
 
+    @Override
+    public int hashCode(){
+	return head != null ? head.hashCode() : 0;
+    }
+
     //should this also have the @Override annotation?
     public String toString(){
 	if(size == 0)
@@ -255,6 +261,9 @@ public class UniLinkedList<E>{
 	return str + ")";
     }
     
+
+    //NESTED CLASSES:
+
     //note about static nested classes
     //(from http://docs.oracle.com/javase/tutorial/java/javaOO/nested.html):
     /*
@@ -267,12 +276,11 @@ public class UniLinkedList<E>{
     */
 
     private static class Node<E>{
-	//globals
 	private E data;
 	private Node<E> next;
 	//constructor
 	private Node(E data){this.data = data; next = null;}
-	//getters&setters
+	//getters&setters&such
 	private E getData(){return data;}
 	private void setData(E data){this.data = data;}
 	private boolean hasNext(){return next != null;}
@@ -288,7 +296,6 @@ public class UniLinkedList<E>{
     }
     
     public static class Cursor<E>{
-	//global
 	private Node<E> position;
 	//constructor
 	private Cursor(UniLinkedList<E> list){position = list.head;}

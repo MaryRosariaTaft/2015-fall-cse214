@@ -3,6 +3,14 @@ import java.util.*;
 
 public class Point2D{
 
+    //NO FIELDS
+
+
+    //NO CONSTRUCTOR
+
+
+    //METHODS:
+
     public static double distance(OrderedDoublePair p, OrderedDoublePair q){
 	double x1 = p.getX(), y1 = p.getY(), x2 = q.getX(), y2 = q.getY();
 	return Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2)); //Java doesn't have the ** notation for exponents!
@@ -151,6 +159,9 @@ public class Point2D{
 	return points;
     }
 
+
+    //MAIN (+ helper for ease of printing):
+
     public static void main(String[] args){
 
 	UniLinkedList<OrderedDoublePair> input = new UniLinkedList<OrderedDoublePair>();
@@ -163,6 +174,9 @@ public class Point2D{
 	print("in my UniLinkedList class.  Please see my comments");
 	print("below the method definition for further information/explanation.");
 	print("- Mary");
+	print("P.S. If you're wondering about the 'import' statements at");
+	print("the top of all my class files, it's simply force of habit");
+	print("for me to include them.");
 	print("\n-------------------");
 	print("\nPlease enter a set of points line-by-line by entering");
 	print("the coordinates for each point in the form 'x y\\n'.");
@@ -190,11 +204,11 @@ public class Point2D{
 	// print(input); //for testing
 	print("Centroid = " + centroid(input));
 	input.deduplicate();
-	print("Centroid of unique points: = " + centroid(input));
+	print("Centroid of unique points = " + centroid(input));
         print("Point closest to the origin is " + smallest(input));
         print("Point farthest from the origin is " + largest(input));
-	//note on the following line: I was unsure whether part (e.) of our assignment
-	//with regards to the main() method called for the point-closest-to-the-centroid
+	//note on the following line: I am unsure whether part (e.) of our assignment
+	//(regarding the main() method) calls for the point-closest-to-the-centroid
 	//*before* filtering out even-sum points or *after.*
 	//I decided to print the point-closest-to-the-centroid as
 	//computed *before* filtering.  Thus:
