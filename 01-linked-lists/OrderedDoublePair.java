@@ -49,6 +49,7 @@ public class OrderedDoublePair{
 	return false;
     }
 
+    //same as equals, except the order of the doubles doesn't matter for equivalence
     public boolean equalsIgnoreOrder(Object obj){
 	if(this == obj)
 	    return true;

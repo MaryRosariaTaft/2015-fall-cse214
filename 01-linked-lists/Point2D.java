@@ -11,6 +11,7 @@ public class Point2D{
 
     //METHODS:
 
+    //returns Euclidean distance between p and q (in this context, the linear distance)
     public static double distance(OrderedDoublePair p, OrderedDoublePair q){
 	double x1 = p.getX(), y1 = p.getY(), x2 = q.getX(), y2 = q.getY();
 	return Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2)); //Java doesn't have the ** notation for exponents!
@@ -21,7 +22,8 @@ public class Point2D{
 	//(...I believe)
     }
     
-    //converts an array of OrderedDoublePairs to a UniLinkedList of OrderedDoublePairs
+    //takes an array of OrderedDoublePairs and returns a corresponding
+    //UniLinkedList of OrderedDoublePairs
     public static UniLinkedList<OrderedDoublePair> fromArray(OrderedDoublePair[] points){
 	UniLinkedList<OrderedDoublePair> ans = new UniLinkedList<OrderedDoublePair>();
 	for(int i = 0; i < points.length; i++){
@@ -30,8 +32,9 @@ public class Point2D{
 	return ans;
     }
 
-    //converts a 2D array of coordinates to a 1D UniLinkedList of OrderedDoublePairs
-    public static UniLinkedList<OrderedDoublePair> from2DArray(double[][] points){
+    //takes a 2D array of coordinates and returns a corresponding
+    //1D UniLinkedList of OrderedDoublePairs
+    public static UniLinkedList<OrderedDoublePair> from2DArray(double[][] points) throws IllegalArgumentException{
 	UniLinkedList<OrderedDoublePair> ans = new UniLinkedList<OrderedDoublePair>();
 	for(int i = 0; i < points.length; i++){
 	    if(points[i].length != 2){
@@ -42,7 +45,8 @@ public class Point2D{
 	return ans;
     }
 
-    public static OrderedDoublePair centroid(UniLinkedList<OrderedDoublePair> points){
+    //returns the centroid of 'points'
+    public static OrderedDoublePair centroid(UniLinkedList<OrderedDoublePair> points) throws IllegalArgumentException{
 	if(points.isEmpty()){
 	    throw new IllegalArgumentException("cannot compute centroid of an empty list");
 	}
@@ -67,7 +71,7 @@ public class Point2D{
     }
 
     //returns the OrderedDoublePair in 'points' closest to 'point'
-    private static OrderedDoublePair closestTo(OrderedDoublePair point, UniLinkedList<OrderedDoublePair> points){
+    private static OrderedDoublePair closestTo(OrderedDoublePair point, UniLinkedList<OrderedDoublePair> points) throws IllegalArgumentException{
 	if(points.size() == 0){
 	    throw new IllegalArgumentException("cannot compute the element of a list closest to a given point if that list is empty");
 	}
@@ -103,7 +107,7 @@ public class Point2D{
     //NOTE: I could, similarly to closestTo(), add/use a farthestFrom() function here
 
     //returns point farthest from the origin
-    public static OrderedDoublePair largest(UniLinkedList<OrderedDoublePair> points){
+    public static OrderedDoublePair largest(UniLinkedList<OrderedDoublePair> points) throws IllegalArgumentException{
 	if(points.size() == 0){
 	    throw new IllegalArgumentException("cannot compute element of a list farthest from the origin if that list is empty");
 	}
@@ -135,7 +139,7 @@ public class Point2D{
     //removes Nodes<OrderedDoublePair> whose x- and y-cors
     //sum to an even number from the given UniLinkedList;
     //edits 'points' and returns the updated UniLinkedList
-    private static UniLinkedList<OrderedDoublePair> filterEvens(UniLinkedList<OrderedDoublePair> points){
+    private static UniLinkedList<OrderedDoublePair> filterEvens(UniLinkedList<OrderedDoublePair> points) throws IllegalArgumentException{
 	if(points.size() == 0)
 	    throw new IllegalArgumentException("cannot filter an empty list");
 	UniLinkedList.Cursor cursor = points.getCursor();
@@ -162,8 +166,7 @@ public class Point2D{
 
     //MAIN (+ helper for ease of printing):
 
-    public static void main(String[] args){
-
+    public static void main(String[] args) throws IllegalArgumentException{
 	UniLinkedList<OrderedDoublePair> input = new UniLinkedList<OrderedDoublePair>();
 	Scanner sc = new Scanner(System.in);
 	boolean done = false;

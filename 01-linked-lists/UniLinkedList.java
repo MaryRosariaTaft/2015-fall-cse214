@@ -15,25 +15,31 @@ public class UniLinkedList<E>{
 
     //METHODS:
 
+    //returns value of list's head
+    //since I use a dummy node this always returns null
     public E head(){
     	return head.getData();
     }
 
+    //returns the size of the list, not including the head
     public int size(){
 	return size;
     }
 
+    //returns true if the list is empty (no including the head), false otherwise
     public boolean isEmpty(){
 	return head.getNext() == null;
 	//or return size == 0;
     }
 
+    //clears the list
     public void clear(){
 	head.setNext(null);
 	size = 0;
 	return;
     }
 
+    //returns the index of the first occurrence of 'element' in a Node of the list
     public int indexOf(E element){
 	Node<E> current = head;
 	int index = -1;
@@ -47,12 +53,14 @@ public class UniLinkedList<E>{
 	return -1;
     }
 
+    //returns true if the list contains a Node whose data is 'element,' false otherwise
     public boolean contains(E element){
 	//would be more incrementally more efficient without
 	//the extra method call, but...
 	return indexOf(element) != -1;
     }
 
+    //adds an element to the end of the list
     //in what case would this return false?
     public boolean add(E element){
 	Node<E> current = head;
@@ -64,9 +72,10 @@ public class UniLinkedList<E>{
     	return true;
     }
 
-    //either returns true or throws exception
+    //adds a new Node whose data is 'elementToAdd' after Node whose data is 'mark'
+    //returns true if successful or throws exception if there is no Node with data 'mark'
     //(thus, in what case would this return false?)
-    public boolean addAfter(E mark, E elementToAdd){
+    public boolean addAfter(E mark, E elementToAdd) throws NoSuchElementException{
 	Node<E> current = head;
 	while(current.hasNext()){
 	    current = current.getNext();
@@ -81,6 +90,7 @@ public class UniLinkedList<E>{
     	throw new NoSuchElementException(mark.toString() + " is not present in this UniLinkedList, " + this);
     }
 
+    //adds a new Node whose data is 'element' to the beginning of the list
     //in what case would this return false?
     public boolean addFirst(E element){
 	Node<E> nodeToAdd = new Node<E>(element);
@@ -90,6 +100,8 @@ public class UniLinkedList<E>{
     	return true;
     }
 
+    //removes first occurrence of a Node whose data is 'element' from the list
+    //returns true if removal was successful, false otherwise (if no Node was removed)
     public boolean remove(E element){
 	if(size == 0)
 	    return false;
@@ -111,6 +123,8 @@ public class UniLinkedList<E>{
     	return false;
     }
 
+    //removes all occurences of Nodes with data 'element'
+    //returns true if any Nodes were removed, false otherwise
     //would be more useful if return type were an int,
     //indicating the num times element was removed
     public boolean removeAll(E element){
@@ -124,6 +138,7 @@ public class UniLinkedList<E>{
 	return true;
     }
 
+    //removes Nodes whose data are duplicates of prior Nodes' data;
     //maintains the *first* instance of a Node with any given element--
     //--thus, I didn't factor out code by using the remove() method, which
     //removes the first instance of aforementioned Node (as opposed to the last)
@@ -153,7 +168,11 @@ public class UniLinkedList<E>{
 	return;
     }
 
-    //helper to deduplicate()
+    //helper to deduplicate();
+    //checks if any of the Nodes prior to 'node' (the parameter)
+    //contain the data of 'node' (again, the parameter);
+    //returns true if there is a Node preceding 'node' (yet again, the parameter)
+    //with duplicate data, false otherwise
     private boolean alreadyHas(Node<E> node){
 	Node<E> checker = head.getNext();
 	while(checker != node){
@@ -194,6 +213,7 @@ public class UniLinkedList<E>{
 
     //OVERRIDING METHODS:
 
+    //returns true if 'obj' is a UniLinkedList with Nodes of equivalent data to 'this'
     //should this have the @Override annotation?
     public boolean equals(Object obj){
 	if(this == obj){
@@ -278,9 +298,9 @@ public class UniLinkedList<E>{
     private static class Node<E>{
 	private E data;
 	private Node<E> next;
-	//constructor
+	//CONSTRUCTOR
 	private Node(E data){this.data = data; next = null;}
-	//getters&setters&such
+	//GETTERS&SETTERS&SUCH
 	private E getData(){return data;}
 	private void setData(E data){this.data = data;}
 	private boolean hasNext(){return next != null;}
@@ -297,9 +317,9 @@ public class UniLinkedList<E>{
     
     public static class Cursor<E>{
 	private Node<E> position;
-	//constructor
+	//CONSTRUCTOR
 	private Cursor(UniLinkedList<E> list){position = list.head;}
-	//methods
+	//METHODS
 	public boolean hasNext(){return position.hasNext();}
 	//how next() works:
 	//changes 'position' to the next Node
@@ -317,6 +337,7 @@ public class UniLinkedList<E>{
 	    // System.out.println("in next() in class Cursor: already at last element; returning data of last element without changing position");
 	    return position.getData();
 	}
+	//see comments for setCursorToHead() in the outer class
 	private void resetPositionToHead(UniLinkedList<E> list){
 	    position = list.head;
 	}
