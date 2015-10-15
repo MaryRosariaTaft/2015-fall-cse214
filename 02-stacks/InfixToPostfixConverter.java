@@ -3,11 +3,11 @@ import java.util.*;
 
 public class InfixToPostfixConverter{
 
-    public static String convert(char[] infix) throws IllegalArgumentException{
+    public String convert(char[] infix) throws IllegalArgumentException{
 	if("+-*/".contains(String.valueOf(infix[0])) || "+-*/".contains(String.valueOf(infix[infix.length-1]))){
 	    throw new IllegalArgumentException("cannot begin or end an infix expression with an operator");
 	}
-	//no balanced parentheses check, but that should cause an EmptyStackException when trying to evaluate
+	//no balanced parentheses check, but imbalanced parentheses cause an EmptyStackException when trying to evaluate
 	String postfix = "";
 	Stack<Character> operators = new Stack<Character>();
 	operators.push('$');
@@ -49,12 +49,12 @@ public class InfixToPostfixConverter{
     }
 
     //returns true if tokenA is of greater precedence than tokenB
-    public static boolean isGreaterPrecedence(char tokenA, char tokenB){
+    public boolean isGreaterPrecedence(char tokenA, char tokenB){
 	return precedence(tokenA) > precedence(tokenB);
     }
 
     //returns precedence of token
-    public static int precedence(char token) throws IllegalArgumentException{
+    public int precedence(char token) throws IllegalArgumentException{
 	if(token == '$') return 0;
 	if(token == '(') return 1;
 	if(token == '+' || token == '-') return 2;
@@ -62,15 +62,15 @@ public class InfixToPostfixConverter{
 	throw new IllegalArgumentException("character is not a valid token");
     }
 
-    public static void main(String[] args){
-	char[] infix0 = {'2', '+', '3', '*', '4'};
-	char[] infix1 = {'(', '(', '2', '+', '3', ')', '*', '4', ')'};
-	char[] infix2 = {'3', '*', '(', '5', '+', '7', ')', '-', '9'};
-	char[] infix3 = {'(', '2', '-', '4', ')', '*', '(', '5', '-', '7', ')', '+', '8'};
-	System.out.println(convert(infix0));
-	System.out.println(convert(infix1));
-	System.out.println(convert(infix2));
-	System.out.println(convert(infix3));
-    }
+    // public static void main(String[] args){
+    // 	char[] infix0 = {'2', '+', '3', '*', '4'};
+    // 	char[] infix1 = {'(', '(', '2', '+', '3', ')', '*', '4', ')'};
+    // 	char[] infix2 = {'3', '*', '(', '5', '+', '7', ')', '-', '9'};
+    // 	char[] infix3 = {'(', '2', '-', '4', ')', '*', '(', '5', '-', '7', ')', '+', '8'};
+    // 	System.out.println(convert(infix0));
+    // 	System.out.println(convert(infix1));
+    // 	System.out.println(convert(infix2));
+    // 	System.out.println(convert(infix3));
+    // }
 
 }
