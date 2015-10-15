@@ -29,7 +29,7 @@ public class InfixToPostfixConverter{
 		    if(precedence(operator) == 1){
 			throw new IllegalArgumentException("unbalanced parentheses: closing parenthesis is missing");
 		    }
-		    postfix += operators.pop();
+		    postfix += operators.pop() + " ";
 		    operator = operators.peek();
 		}
 		operators.push(infix[i]);
@@ -65,8 +65,12 @@ public class InfixToPostfixConverter{
     public static void main(String[] args){
 	char[] infix0 = {'2', '+', '3', '*', '4'};
 	char[] infix1 = {'(', '(', '2', '+', '3', ')', '*', '4', ')'};
+	char[] infix2 = {'3', '*', '(', '5', '+', '7', ')', '-', '9'};
+	char[] infix3 = {'(', '2', '-', '4', ')', '*', '(', '5', '-', '7', ')', '+', '8'};
 	System.out.println(convert(infix0));
 	System.out.println(convert(infix1));
+	System.out.println(convert(infix2));
+	System.out.println(convert(infix3));
     }
 
 }
