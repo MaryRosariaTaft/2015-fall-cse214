@@ -1,6 +1,16 @@
+/**
+ * Mary R. Taft
+ * 110505413
+ * CSE 214 (2)
+ * TA: Mingchen Zhang
+ */
+
 import java.io.*;
 import java.util.*;
 
+/**
+ * This is a generic stack.
+ */
 public class Stack<E>{
 
     private Node<E> top = new Node(null);
@@ -13,7 +23,7 @@ public class Stack<E>{
     }
 
     public boolean isEmpty(){
-	return false;
+	return size == 0;
     }
 
     public E peek() throws EmptyStackException{
