@@ -1,7 +1,18 @@
+/**
+ * Mary R. Taft
+ * 110505413
+ * CSE 214 (2)
+ * TA: Mingchen Zhang
+ */
+
 import java.io.*;
 import java.util.*;
 
-public class InfixToPostfixConverter{
+/**
+ * This class contains a method which converts an infix expression to a postfix expression.
+ * Please see the printlns in the PostfixEvaluator class (or just run the program) regarding this program's limitations.
+ */
+public class InFixToPostfixConverter{
 
     public String convert(char[] infix) throws IllegalArgumentException{
 	if("+-*/".contains(String.valueOf(infix[0])) || "+-*/".contains(String.valueOf(infix[infix.length-1]))){
@@ -24,11 +35,7 @@ public class InfixToPostfixConverter{
 		}
 	    }else if("+-*/".contains(String.valueOf(infix[i]))){
 		Character operator = operators.peek();
-		while(isGreaterPrecedence(operator, infix[i])){
-		    //not sure the following check is necessary in this location (as it as at the end of this method), but it doesn't hurt for now
-		    if(precedence(operator) == 1){
-			throw new IllegalArgumentException("unbalanced parentheses: closing parenthesis is missing");
-		    }
+		while(isGreaterOrEqualPrecedence(operator, infix[i])){
 		    postfix += operators.pop() + " ";
 		    operator = operators.peek();
 		}
@@ -48,9 +55,9 @@ public class InfixToPostfixConverter{
 	return postfix;
     }
 
-    //returns true if tokenA is of greater precedence than tokenB
-    public boolean isGreaterPrecedence(char tokenA, char tokenB){
-	return precedence(tokenA) > precedence(tokenB);
+    //returns true if tokenA is of greater or equal precedence than tokenB
+    public boolean isGreaterOrEqualPrecedence(char tokenA, char tokenB){
+	return precedence(tokenA) >= precedence(tokenB);
     }
 
     //returns precedence of token
