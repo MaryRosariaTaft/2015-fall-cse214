@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class BinaryTreeNodeImpl<E extends Comparable<E>> implements BinaryTreeNode<E>, Comparable<BinaryTreeNodeImpl<E>>{
+public class BinaryTreeNodeImpl<E extends Comparable<E>> implements BinaryTreeNode<E>{
 
     E data;
     BinaryTreeNode<E> parent = null;
@@ -50,10 +50,6 @@ public class BinaryTreeNodeImpl<E extends Comparable<E>> implements BinaryTreeNo
 	}else{
 	    parent.setRight(null);
 	}
-    }
-
-    public int compareTo(BinaryTreeNodeImpl<E> node){
-	return data.compareTo(node.getData());
     }
 
 }
