@@ -4,9 +4,9 @@ import java.util.*;
 public class BinaryTreeNodeImpl<E extends Comparable<E>> implements BinaryTreeNode<E>, Comparable<BinaryTreeNodeImpl<E>>{
 
     E data;
-    BinaryTreeNodeImpl<E> parent = null;
-    BinaryTreeNodeImpl<E> left = null;
-    BinaryTreeNodeImpl<E> right = null;
+    BinaryTreeNode<E> parent = null;
+    BinaryTreeNode<E> left = null;
+    BinaryTreeNode<E> right = null;
 
     public BinaryTreeNodeImpl(E data){
 	this.data = data;
@@ -20,27 +20,27 @@ public class BinaryTreeNodeImpl<E extends Comparable<E>> implements BinaryTreeNo
 	this.data = data;
     }
 
-    public BinaryTreeNodeImpl<E> getParent(){
+    public BinaryTreeNode<E> getParent(){
 	return parent;
     }
 
-    public void setParent(BinaryTreeNodeImpl<E> node){
+    public void setParent(BinaryTreeNode<E> node){
 	parent = node;
     }
 
-    public BinaryTreeNodeImpl<E> getLeft(){
+    public BinaryTreeNode<E> getLeft(){
 	return left;
     }
 
-    public void setLeft(BinaryTreeNodeImpl<E> node){
+    public void setLeft(BinaryTreeNode<E> node){
 	left = node;
     }
 
-    public BinaryTreeNodeImpl<E> getRight(){
+    public BinaryTreeNode<E> getRight(){
 	return right;
     }
 
-    public void setRight(BinaryTreeNodeImpl<E> node){
+    public void setRight(BinaryTreeNode<E> node){
 	right = node;
     }
 
