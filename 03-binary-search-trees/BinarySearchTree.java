@@ -207,22 +207,22 @@ public class BinarySearchTree<E extends Comparable<E>> implements BinaryTree<E>{
 
     }
 
-    public void printTreeSorta(){
-	if(root != null)
-	    System.out.println("root: " + root.getData());
-	if(root.getLeft() != null)
-	    System.out.println("left: " + root.getLeft().getData());
-	if(root.getRight() != null)
-	    System.out.println("right: " + root.getRight().getData());
-	if(root.getLeft().getLeft() != null)
-	    System.out.println("left-left: " + root.getLeft().getLeft().getData());
-	if(root.getLeft().getRight() != null)
-	    System.out.println("left-right: " + root.getLeft().getRight().getData());
-	if(root.getRight().getLeft() != null)
-	    System.out.println("right-left: " + root.getRight().getLeft().getData());
-	if(root.getRight().getRight() != null)
-	    System.out.println("right-right: " + root.getRight().getRight().getData());
-    }
+    // public void printTreeSorta(){
+    // 	if(root != null)
+    // 	    System.out.println("root: " + root.getData());
+    // 	if(root.getLeft() != null)
+    // 	    System.out.println("left: " + root.getLeft().getData());
+    // 	if(root.getRight() != null)
+    // 	    System.out.println("right: " + root.getRight().getData());
+    // 	if(root.getLeft().getLeft() != null)
+    // 	    System.out.println("left-left: " + root.getLeft().getLeft().getData());
+    // 	if(root.getLeft().getRight() != null)
+    // 	    System.out.println("left-right: " + root.getLeft().getRight().getData());
+    // 	if(root.getRight().getLeft() != null)
+    // 	    System.out.println("right-left: " + root.getRight().getLeft().getData());
+    // 	if(root.getRight().getRight() != null)
+    // 	    System.out.println("right-right: " + root.getRight().getRight().getData());
+    // }
 
     public static void main(String[] args){
 
@@ -230,31 +230,60 @@ public class BinarySearchTree<E extends Comparable<E>> implements BinaryTree<E>{
 
     	BinarySearchTree<String> tree = new BinarySearchTree<String>(comp);
 
-	tree.add("4root");
-	tree.add("2left");
-	tree.add("6right");
-	tree.add("3leftright");
-	tree.add("1leftleft");
-	tree.add("7rightright");
-	// tree.add("5rightleft");
-	tree.printTreeSorta();
+	// tree.add("4root");
+	// tree.add("2left");
+	// tree.add("6right");
+	// tree.add("3leftright");
+	// tree.add("1leftleft");
+	// tree.add("7rightright");
+	// // tree.add("5rightleft");
+	// tree.printTreeSorta();
 
-	System.out.println();
+	// System.out.println();
 
-	// tree.remove("8");
-	// tree.remove("4root");
-	// tree.remove("5rightleft");
-	tree.remove("6right");
-	tree.remove("2left");
-	tree.printTreeSorta();
+	// // tree.remove("8");
+	// // tree.remove("4root");
+	// // tree.remove("5rightleft");
+	// tree.remove("6right");
+	// tree.remove("2left");
+	// tree.printTreeSorta();
 
-	//now only contains 4,3,7,1
+	// //now only contains 4,3,7,1
 
-	System.out.println("min: " + tree.min());
-	System.out.println("max: " + tree.max());
+	// System.out.println("min: " + tree.min());
+	// System.out.println("max: " + tree.max());
 
-	System.out.println(tree.contains("4root"));
-	System.out.println(tree.contains("42"));
+	// System.out.println(tree.contains("4root"));
+	// System.out.println(tree.contains("42"));
+
+	
+    	Scanner sc = new Scanner(System.in);
+	System.out.print("Enter a comma-delimited line of strings: ");
+	String input = sc.nextLine();
+	input = input.replaceAll("\\s","");
+	String tokens[] = input.split(",");
+	// System.out.println("You entered: " + Arrays.toString(tokens));
+	for(int i = 0; i < tokens.length; i++){
+	    tree.add(tokens[i]);
+	}
+	System.out.println("A BST was generated containing the strings you entered.");
+	boolean done = false;
+	while(!done){
+	    System.out.print("Enter a string to search for in the BST: "); 
+	    input = sc.nextLine();
+    	    if(input.toLowerCase().equals("quit")){
+    		done = true;
+	    }else{
+		boolean doesContain = tree.contains(input);
+		if(doesContain){
+		    System.out.println("String \"" + input + "\" found in " + 0 + " steps."); 
+		}else{
+		    System.out.println("String \"" + input + "\" not found after " + 0 + " steps."); 
+		}
+	    }
+
+	}
+	// tree.printTreeSorta();
 
     }
 
