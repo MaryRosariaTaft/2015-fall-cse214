@@ -248,6 +248,15 @@ public class BinarySearchTree<E extends Comparable<E>> implements BinaryTree<E>{
 	tree.remove("2left");
 	tree.printTreeSorta();
 
+	//now only contains 4,3,7,1
+
+	System.out.println(tree.contains(4));
+	System.out.println(tree.contains(3));
+	System.out.println(tree.contains(7));
+	System.out.println(tree.contains(1));
+	System.out.println(tree.contains(5));
+	System.out.println(tree.contains(42));
+
     }
 
 }
