@@ -9,8 +9,8 @@ import java.io.*;
 import java.util.*;
 
 /**
- * 
- * 
+ * This is a simple interface for a node
+ * which would be used in a binary tree.
  */
 public interface BinaryTreeNode<E>{
 

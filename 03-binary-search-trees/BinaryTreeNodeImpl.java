@@ -9,8 +9,9 @@ import java.io.*;
 import java.util.*;
 
 /**
- * 
- * 
+ * This is an implementation of BinaryTreeNode.
+ * It contains no methods beyond those required by its interface.
+ * The data each BinaryTreeNodeImpl holds may be of any Comparable type.
  */
 public class BinaryTreeNodeImpl<E extends Comparable<E>> implements BinaryTreeNode<E>{
 

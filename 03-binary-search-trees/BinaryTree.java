@@ -9,8 +9,8 @@ import java.io.*;
 import java.util.*;
 
 /**
- * 
- * 
+ * This is a simple interface for a binary tree.
+ * (Not, by necessity, a binary *search* tree.)
  */
 public interface BinaryTree<E>{
 

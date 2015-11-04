@@ -9,8 +9,11 @@ import java.io.*;
 import java.util.*;
 
 /**
- * 
- * 
+ * This is a binary search tree which implements BinaryTree.
+ * Its nodes are of type BinaryTreeNodeImpl.
+ * The data its nodes contain may be of any Comparable type.
+ * A BinarySearchTree must be constructed with a Comparator,
+ * such that it has a means by which to order its nodes.
  */
 public class BinarySearchTree<E extends Comparable<E>> implements BinaryTree<E>{
 
