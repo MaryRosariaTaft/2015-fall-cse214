@@ -1,6 +1,17 @@
+/**
+ * Mary R. Taft
+ * 110505413
+ * CSE 214 (3)
+ * TA: Mingchen Zhang
+ */
+
 import java.io.*;
 import java.util.*;
 
+/**
+ * 
+ * 
+ */
 public interface BinaryTreeNode<E>{
 
     E getData();

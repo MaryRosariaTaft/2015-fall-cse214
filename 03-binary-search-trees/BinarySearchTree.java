@@ -1,6 +1,17 @@
+/**
+ * Mary R. Taft
+ * 110505413
+ * CSE 214 (3)
+ * TA: Mingchen Zhang
+ */
+
 import java.io.*;
 import java.util.*;
 
+/**
+ * 
+ * 
+ */
 public class BinarySearchTree<E extends Comparable<E>> implements BinaryTree<E>{
 
     BinaryTreeNodeImpl<E> root;
@@ -165,11 +176,17 @@ public class BinarySearchTree<E extends Comparable<E>> implements BinaryTree<E>{
 	return current;
     }
 
+    private int count;
+
     public boolean contains(E element){
-	return contains(new BinaryTreeNodeImpl<E>(element), root);
+	count = 0;
+	boolean result = contains(new BinaryTreeNodeImpl<E>(element), root);
+	System.out.print("After " + count + " steps, ");
+	return result;
     }
 
     private boolean contains(BinaryTreeNodeImpl<E> node, BinaryTreeNodeImpl<E> subroot){
+	count++;
 	if(subroot == null){
 	    return false;
 	}
@@ -258,7 +275,7 @@ public class BinarySearchTree<E extends Comparable<E>> implements BinaryTree<E>{
 
 	
     	Scanner sc = new Scanner(System.in);
-	System.out.print("Enter a comma-delimited line of strings: ");
+	System.out.print("Enter a comma-delimited line of strings (just don't include the word \"quit\"): ");
 	String input = sc.nextLine();
 	input = input.replaceAll("\\s","");
 	String tokens[] = input.split(",");
@@ -276,9 +293,9 @@ public class BinarySearchTree<E extends Comparable<E>> implements BinaryTree<E>{
 	    }else{
 		boolean doesContain = tree.contains(input);
 		if(doesContain){
-		    System.out.println("String \"" + input + "\" found in " + 0 + " steps."); 
+		    System.out.println("String \"" + input + "\" was found.");
 		}else{
-		    System.out.println("String \"" + input + "\" not found after " + 0 + " steps."); 
+		    System.out.println("String \"" + input + "\" was not found.");
 		}
 	    }
 
