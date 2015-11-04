@@ -250,12 +250,11 @@ public class BinarySearchTree<E extends Comparable<E>> implements BinaryTree<E>{
 
 	//now only contains 4,3,7,1
 
-	System.out.println(tree.contains(4));
-	System.out.println(tree.contains(3));
-	System.out.println(tree.contains(7));
-	System.out.println(tree.contains(1));
-	System.out.println(tree.contains(5));
-	System.out.println(tree.contains(42));
+	System.out.println("min: " + tree.min());
+	System.out.println("max: " + tree.max());
+
+	System.out.println(tree.contains("4root"));
+	System.out.println(tree.contains("42"));
 
     }
 
