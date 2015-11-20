@@ -1,9 +1,9 @@
 import java.io.*;
-improt java.util.*;
+import java.util.*;
 
-public static interface Sorter<E>{
+public interface Sorter<E>{
 
-    public static void sort();
-    public static void setComparator(Comparator<E> comparator);
+    public void sort();
+    public void setComparator(Comparator<E> comparator);
 
 }
