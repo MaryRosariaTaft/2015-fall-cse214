@@ -1,5 +1,18 @@
+/**
+ * Mary R. Taft
+ * 110505413
+ * CSE 214 (4)
+ * TA: Mingchen Zhang
+ */
 import java.io.*;
 import java.util.*;
+
+/**
+ * This class takes an ArrayList of some type E of Objects
+ * and a Comparator via its constructor; using sort(), it
+ * sorts the elements in the ArrayList using the quicksort
+ * algorithm.
+ */
 
 public class Quicksorter<E> implements Sorter<E>{
 

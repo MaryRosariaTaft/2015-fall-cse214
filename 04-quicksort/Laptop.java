@@ -1,5 +1,27 @@
+/**
+ * Mary R. Taft
+ * 110505413
+ * CSE 214 (4)
+ * TA: Mingchen Zhang
+ */
+
 import java.io.*;
 import java.util.*;
+
+/**
+ * This class represents a Laptop object.
+ * A laptop has brand, processor speed, memory, and hdd
+ * characteristics (stored as global variables).
+ * 
+ * This class contains the main() method and all
+ * supporting methods, nested classes, and variables
+ * (e.g., methods to read user input, Comparator
+ * definitions, Comparator variables).  Main() asks
+ * the user to enter a set of ints or Laptops, then
+ * produces the respective sorted sets.
+ * If the user enters invalid input, the program
+ * will break.
+ */
 
 public class Laptop{
 
@@ -39,7 +61,7 @@ public class Laptop{
 	    if(input.toLowerCase().equals("end")){
 		done = true;
 	    }else{
-		//error if input is not a character representation of a decimal integer
+		//error if input is not an integer
 		list.add(Integer.parseInt(input));
 	    }
 	}
@@ -63,8 +85,8 @@ public class Laptop{
 		done = true;
 	    }else{
 		info = input.split(",");
-		if(info.length > 4){
-		    throw new IllegalArgumentException("too many parameters for Laptop");
+		if(info.length != 4){
+		    throw new IllegalArgumentException("incorrect number of parameters for Laptop");
 		}
 		brand = info[0];
 		procSpeed = new Double(info[1]);
