@@ -1,5 +1,18 @@
+/**
+ * Mary R. Taft
+ * 110505413
+ * CSE 214 (5)
+ * TA: Mingchen Zhang
+ */
 import java.io.*;
 import java.util.*;
+
+/**
+ * This class is a basic dictionary for Hashable elements:
+ * it implements insertion, deletion, and searching methods.
+ * It uses an ArrayList to store values (using indices as keys)
+ * and takes a user-determined size/capacity (default is 50).
+ */
 
 public class DirectAddressTable<V extends Hashable> implements Dictionary<V>{
 
@@ -19,6 +32,7 @@ public class DirectAddressTable<V extends Hashable> implements Dictionary<V>{
 	}
     }
 
+    //O(n)
     public boolean isEmpty(){
 	for(int i = 0; i < MAX_CAPACITY; i++)
 	    if(table.get(i) != null)
@@ -31,6 +45,7 @@ public class DirectAddressTable<V extends Hashable> implements Dictionary<V>{
      * Just overwrites whatever preexists.
      * In so doing, maintains constant time!
      */
+    //O(1)
     public void insert(V value){
 	if(value == null)
 	    throw new NullPointerException();
@@ -40,6 +55,7 @@ public class DirectAddressTable<V extends Hashable> implements Dictionary<V>{
 	table.set(index, value);
     }
 
+    //O(1)
     public V delete(V value){
 	if(value == null)
 	    throw new NullPointerException();
@@ -49,6 +65,7 @@ public class DirectAddressTable<V extends Hashable> implements Dictionary<V>{
 	return tmp;
     }
 
+    //O(1)
     public V find(int key){
 	if(key < 0 || key > MAX_CAPACITY)
 	    throw new IllegalArgumentException();
@@ -109,8 +126,14 @@ public class DirectAddressTable<V extends Hashable> implements Dictionary<V>{
     // 	hashTable.insert(new Alphabet('x'));
     // 	hashTable.insert(new Alphabet('y'));
     // 	hashTable.insert(new Alphabet('z'));
+    // 	//the following should be invalid
+    // 	// hashTable.insert(new Alphabet('!'));
     // 	System.out.println("table:\n" + hashTable);
     // 	System.out.println("the table is empty: " + hashTable.isEmpty());
+    // 	//the following should be invalid
+    // 	// DirectAddressTable<nothashable> badtable = new DirectAddressTable<nothashable>(26);
+    // 	// badtable.insert(new nothashable('a'));
+    // 	// System.out.println(badtable);
     // }
 
 }
