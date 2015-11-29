@@ -1,0 +1,13 @@
+public class nothashable{
+
+    private Character c;
+
+    nothashable(Character c){
+	this.c = c;
+    }
+
+    public Character getC(){
+	return c;
+    }
+
+}
